@@ -99,14 +99,23 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(array, x, y) {
+function getWinnersByYear(array, getYearsCB, getWinnersCB) {
   /*
     var year
-    var winners
+    var winner
     for loop
     return string interpolation
     */
+  let year = getYearsCB(array); //I don't understand this part, don't we need another parameter here to work?
+  let winner = getWinnersCB(array); //Same as above, both these CBs might need another parameter?
+  let winnersByYear = [];
+  for (let i = 0; i < array.length; i++) {
+    return winnersByYear.push(`In ${year[i]}, ${winner[i]} won the world cup!`);
+  }
+  return winnersByYear;
 }
+
+console.log(getWinnersByYear(fifaData, getYears, getWinners));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher order function getAverageGoals to do the following: 
@@ -118,12 +127,23 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
+function getAverageGoals(getFinalsCB) {
   /* 
    reduce to get sum of home and away (use 2 reduces)
    add sum of home and away then divide by 2 and fix it to 2 decimal places
    */
+  let homeSum = getFinalsCB.reduce(function (accumulator, item) {
+    return accumulator + item["Home Team Goals"];
+  });
+  let awaySum = getFinalsCB.reduce(function (accumulator, item) {
+    return accumulator + item["Away Team Goals"];
+  });
+  let totalSum = homeSum + awaySum;
+  let average = totalSum / 2;
+  return average.toFixed(2);
 }
+
+console.log(getAverageGoals(getFinals(fifaData))); //not sure how this argument will work
 
 /// 🥅 STRETCH 🥅 ///
 
