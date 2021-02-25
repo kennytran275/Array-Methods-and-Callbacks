@@ -99,23 +99,17 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(array, getYearsCB, getWinnersCB) {
-  /*
-    var year
-    var winner
-    for loop
-    return string interpolation
-    */
-  let year = getYearsCB(array); //I don't understand this part, don't we need another parameter here to work?
-  let winner = getWinnersCB(array); //Same as above, both these CBs might need another parameter?
-  let winnersByYear = [];
-  for (let i = 0; i < array.length; i++) {
-    return winnersByYear.push(`In ${year[i]}, ${winner[i]} won the world cup!`);
-  }
+function getWinnersByYear(fifa, getYearsCB, getWinnersCB) {
+  let year = getYearsCB(fifa, getFinals);
+  let winner = getWinnersCB(fifa, getFinals);
+  let winnersByYear = year.map(function (item, i) {
+    return `In ${year[i]}, ${winner[i]} won the world cup!`;
+  });
   return winnersByYear;
 }
 
 console.log(getWinnersByYear(fifaData, getYears, getWinners));
+// Map when called on an array will apply the function in the argument to every element in the array
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher order function getAverageGoals to do the following: 
