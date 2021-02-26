@@ -122,22 +122,20 @@ Use the higher order function getAverageGoals to do the following:
 */
 
 function getAverageGoals(getFinalsCB) {
-  /* 
-   reduce to get sum of home and away (use 2 reduces)
-   add sum of home and away then divide by 2 and fix it to 2 decimal places
-   */
   let homeSum = getFinalsCB.reduce(function (accumulator, item) {
     return accumulator + item["Home Team Goals"];
-  });
+  }, 0);
   let awaySum = getFinalsCB.reduce(function (accumulator, item) {
     return accumulator + item["Away Team Goals"];
-  });
+  }, 0);
   let totalSum = homeSum + awaySum;
-  let average = totalSum / 2;
+  let average = totalSum / getFinalsCB.length;
+
   return average.toFixed(2);
 }
 
-console.log(getAverageGoals(getFinals(fifaData))); //not sure how this argument will work
+console.log(getAverageGoals(getFinals(fifaData))); 
+// NOTE: HIGHER ORDER FUNCTIONS MEAN MAP, FILTER, AND REDUCE! 
 
 /// 🥅 STRETCH 🥅 ///
 
